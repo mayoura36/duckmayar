@@ -24,15 +24,15 @@ void Game::Draw() {
 	}
 }
 void Game::HandleInput() {
-	if (IsKeyDown(KEY_LEFT))
+	if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A))
 	{
 		duck.MoveLeft();
 	}
-    else if (IsKeyDown(KEY_RIGHT))
+	if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D))
 	{
 		duck.MoveRight();
 	}
-	else if (IsKeyDown(KEY_SPACE))
+	if (IsKeyPressed(KEY_SPACE))
 	{
 		duck.FireLaser();
 	}
