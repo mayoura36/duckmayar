@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="MayarInvaders.vcxproj" />
+  <Project Path="MayarInvaders.vcxproj" Id="c77b074e-9202-4327-aa2b-88edd07646cf" />
 </Solution>

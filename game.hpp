@@ -8,5 +8,6 @@ public:
 	void Update();
 	void HandleInput();
 private:
+	void DeleteInactiveLasers();
 	Theduck duck;
 };

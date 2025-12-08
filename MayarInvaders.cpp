@@ -2,7 +2,8 @@
 //da el main bta3y
 #include "raylib.h"
 #include "game.hpp"
-#include "laser.hpp"
+#include"theduck.hpp"
+//#include "laser.hpp"
 
 int main()
 {
@@ -12,14 +13,17 @@ int main()
 	InitWindow(windowwidth, windowheight, "C++ Duck Invaders");
 	SetTargetFPS(60);
 	Game game;
-	Laser laser = Laser({ 100,100 }, 7);
+	Duck ;
+	//Laser laser = Laser({ 100,100 }, -7);
 	while (WindowShouldClose() == false)
 	{
 		game.HandleInput();
+		game.Update();
+		//laser.Update();
 		BeginDrawing();
 		ClearBackground(grey);
 		game.Draw();
-		laser.Draw();
+		//laser.Draw();
 		EndDrawing();
 	}
 	CloseWindow();
