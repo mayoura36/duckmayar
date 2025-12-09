@@ -10,7 +10,7 @@ Engduck::Engduck(int type, Vector2 position)
 
 
 	// handles duck image scale;
-	const float scale = 0.2;
+	const float scale = 0.17;
 	Image tempImage;
 
 	int newWidth;

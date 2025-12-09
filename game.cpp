@@ -60,7 +60,7 @@ std::vector<Engduck> Game::CreateEngducks()
 		for (int col = 0; col < 10; col++)
 		{
 			int engduckType;
-			if(row==0)
+			if (row == 0)
 			{
 				engduckType = 3;
 			}
@@ -72,9 +72,9 @@ std::vector<Engduck> Game::CreateEngducks()
 			{
 				engduckType = 1;
 			}
-			float x = 75+col * 50;
-			float y = 110+row * 140;
-			engducks.push_back( Engduck(engduckType,{x,y}));
+			float x = 15 + col * 120;
+			float y = 10 + row * 140;
+			engducks.push_back(Engduck(engduckType, { x,y }));
 		}
 	}
 	return engducks;

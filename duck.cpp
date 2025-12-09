@@ -10,7 +10,7 @@ Theduck::Theduck()
 	ImageResize(&temp_image, newWidth, newHeight);
 	image = LoadTextureFromImage(temp_image);
 	UnloadImage(temp_image);
-	position.x = (GetScreenWidth() - image.width)/2;
+	position.x = (GetScreenWidth() - image.width) / 2;
 	position.y = GetScreenHeight() - image.height;
 	lastFireTime = 0.0;
 }
@@ -32,8 +32,8 @@ void Theduck::MoveLeft() {
 void Theduck::MoveRight()
 {
 	position.x += 10;
-	if(position.x>GetScreenWidth()-image.width)
-	{ 
+	if (position.x > GetScreenWidth() - image.width)
+	{
 		position.x = GetScreenWidth() - image.width;
 	}
 }

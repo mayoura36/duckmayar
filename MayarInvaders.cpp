@@ -8,12 +8,12 @@
 int main()
 {
 	Color grey{ 29,29,27,255 };
-	int windowwidth = 750;
-	int windowheight = 700;
+	int windowwidth = 1200;
+	int windowheight = 800;
 	InitWindow(windowwidth, windowheight, "C++ Duck Invaders");
 	SetTargetFPS(60);
 	Game game;
-	Engduck engduck = Engduck(1, { 100,100 });
+	Engduck engduck = Engduck(1, { 100,1000 });
 	//Laser laser = Laser({ 100,100 }, -7);
 	while (WindowShouldClose() == false)
 	{
