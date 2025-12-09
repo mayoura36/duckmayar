@@ -4,7 +4,7 @@ Theduck::Theduck()
 {
 	//image = LoadTexture("Graphics/water_gun_closed.png");
 	Image temp_image = LoadImage("Graphics/water_gun_closed.png");
-	const float scale = 0.2;
+	const float scale = 0.17;
 	int newWidth = temp_image.width * scale;
 	int newHeight = temp_image.height * scale;
 	ImageResize(&temp_image, newWidth, newHeight);

@@ -2,7 +2,7 @@
 #include<iostream>
 Game::Game()
 {
-
+	engducks = CreateEngducks();
 }
 Game::~Game()
 {
@@ -21,6 +21,9 @@ void Game::Draw() {
 	{
 		laser.Draw();
 
+	}
+	for (auto& engduck : engducks) {
+		engduck.Draw();
 	}
 }
 void Game::HandleInput() {
@@ -49,4 +52,30 @@ void Game::DeleteInactiveLasers()
 			++it;
 		}
 	}
+}
+std::vector<Engduck> Game::CreateEngducks()
+{
+	std::vector<Engduck>engducks;
+	for (int row = 0; row < 3; row++) {
+		for (int col = 0; col < 10; col++)
+		{
+			int engduckType;
+			if(row==0)
+			{
+				engduckType = 3;
+			}
+			else if (row == 1)
+			{
+				engduckType = 2;
+			}
+			else
+			{
+				engduckType = 1;
+			}
+			float x = 75+col * 50;
+			float y = 110+row * 140;
+			engducks.push_back( Engduck(engduckType,{x,y}));
+		}
+	}
+	return engducks;
 }

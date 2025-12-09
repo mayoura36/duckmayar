@@ -10,5 +10,7 @@ public:
 	void HandleInput();
 private:
 	void DeleteInactiveLasers();
+	std::vector<Engduck>CreateEngducks();
 	Theduck duck;
+	std::vector<Engduck>engducks;
 };
