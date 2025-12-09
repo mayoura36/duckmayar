@@ -6,7 +6,7 @@ public:
 	void Update();
 	void Draw();
 	int GetType();
-	Texture2D image;
+	static Texture2D duckImages[3];
 	int type;
 	Vector2 position;
 private:

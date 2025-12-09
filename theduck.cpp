@@ -1,33 +1,63 @@
 #include"theduck.hpp"
+
+Texture2D Engduck::duckImages[3] = {};
+
+
 Engduck::Engduck(int type, Vector2 position)
 {
 	this->type = type;
 	this->position = position;
-	switch (type)
+
+
+	// handles duck image scale;
+	const float scale = 0.2;
+	Image tempImage;
+
+	int newWidth;
+	int newHeight;
+
+	if (duckImages[type - 1].id == 0)
 	{
-	case 1:
-		//image = LoadTexture("Graphics/yellow_duck.png");
-		Image temp_imagem = LoadImage("Graphics/yellow_duck.png");
-		const float scalem = 0.2;
-		int newWidthm = temp_imagem.width * scalem;
-		int newHeightm = temp_imagem.height * scalem;
-		ImageResize(&temp_imagem, newWidthm, newHeightm);
-		image = LoadTextureFromImage(temp_imagem);
-		UnloadImage(temp_imagem);
-		break;
-	case 2:
-		image = LoadTexture("Graphics/beige_duck.png");
-		break;
-	case 3:
-		image = LoadTexture("Graphics/pink_duck.png");
-		break;
-	default:
-		image = LoadTexture("Graphics/yellow_duck.png");
-		break;
+		switch (type)
+		{
+		case 1:
+			tempImage = LoadImage("Graphics/yellow_duck.png");
+			newWidth = tempImage.width * scale;
+			newHeight = tempImage.height * scale;
+			ImageResize(&tempImage, newWidth, newHeight);
+			duckImages[0] = LoadTextureFromImage(tempImage);
+			UnloadImage(tempImage);
+			break;
+		case 2:
+			tempImage = LoadImage("Graphics/beige_duck.png");
+			newWidth = tempImage.width * scale;
+			newHeight = tempImage.height * scale;
+			ImageResize(&tempImage, newWidth, newHeight);
+			duckImages[1] = LoadTextureFromImage(tempImage);
+			UnloadImage(tempImage);
+			break;
+		case 3:
+			tempImage = LoadImage("Graphics/pink_duck.png");
+			newWidth = tempImage.width * scale;
+			newHeight = tempImage.height * scale;
+			ImageResize(&tempImage, newWidth, newHeight);
+			duckImages[2] = LoadTextureFromImage(tempImage);
+			UnloadImage(tempImage);
+			break;
+		default:
+			tempImage = LoadImage("Graphics/yellow_duck.png");
+			newWidth = tempImage.width * scale;
+			newHeight = tempImage.height * scale;
+			ImageResize(&tempImage, newWidth, newHeight);
+			duckImages[0] = LoadTextureFromImage(tempImage);
+			UnloadImage(tempImage);
+			break;
+		}
 	}
+
 }
 void Engduck::Draw() {
-	DrawTextureV(image, position, WHITE);
+	DrawTextureV(duckImages[type - 1], position, WHITE);
 }
 int Engduck::GetType() {
 	return type;
