@@ -131,11 +131,13 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="laser.cpp" />
     <ClCompile Include="MayarInvaders.cpp" />
+    <ClCompile Include="theduck.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="duck.hpp" />
     <ClInclude Include="game.hpp" />
     <ClInclude Include="laser.hpp" />
+    <ClInclude Include="theduck.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MayarInvaders.slnx" />

@@ -13,7 +13,7 @@ int main()
 	InitWindow(windowwidth, windowheight, "C++ Duck Invaders");
 	SetTargetFPS(60);
 	Game game;
-	Duck ;
+	Engduck engduck = Engduck(1, { 100,100 });
 	//Laser laser = Laser({ 100,100 }, -7);
 	while (WindowShouldClose() == false)
 	{
@@ -23,6 +23,7 @@ int main()
 		BeginDrawing();
 		ClearBackground(grey);
 		game.Draw();
+		//engduck.Draw();
 		//laser.Draw();
 		EndDrawing();
 	}

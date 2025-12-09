@@ -1,13 +1,13 @@
 #pragma once
 #include"raylib.h"
-class Duck {
+class Engduck {
 public:
-	Duck(int type, Vector2 position);
+	Engduck(int type, Vector2 position);
 	void Update();
 	void Draw();
 	int GetType();
+	Texture2D image;
 	int type;
 	Vector2 position;
-
 private:
 };

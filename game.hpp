@@ -1,5 +1,6 @@
 #pragma once
 #include "duck.hpp"
+#include"theduck.hpp"
 class Game {
 public:
 	Game();
