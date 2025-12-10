@@ -55,7 +55,7 @@ void Game::Draw()
 	}
 	for (auto& laser : engduckLaser)
 	{
-		laser.Draw();
+		laser.DrawEgg();
 	}
 }
 void Game::HandleInput()
@@ -103,7 +103,7 @@ std::vector<Engduck> Game::CreateEngducks()
 {
 	std::vector<Engduck>engducks;
 	for (int row = 0; row < 4; row++) {
-		for (int col = 0; col < 16; col++)
+		for (int col = 0; col < 10; col++)
 		{
 			int engduckType;
 			if (row == 0)
@@ -118,8 +118,8 @@ std::vector<Engduck> Game::CreateEngducks()
 			{
 				engduckType = 1;
 			}
-			float x = 10 + col * 70;
-			float y = 15 + row * 80;
+			float x = 10 + col * 90;
+			float y = 15 + row * 90;
 			engducks.push_back(Engduck(engduckType, { x,y }));
 		}
 	}
@@ -152,10 +152,12 @@ void Game::MoveDownEngducks(int distance)
 void Game::EngduckShootLaser()
 {
 	double currentTime = GetTime();
-	if (currentTime - lastFireTime >= engduckLaserShootInterval && !engducks.empty()) {
+	if (currentTime - lastFireTime >= engduckLaserShootInterval && !engducks.empty())
+	{
 		int randomIndex = GetRandomValue(0, engducks.size() - 1);
 		Engduck& engduck = engducks[randomIndex];
-		engduckLaser.push_back(Laser({ engduck.position.x + engduck.duckImages[engduck.type - 1].width / 2,engduck.position.y + engduck.duckImages[engduck.type - 1].height }, 6));
+		engduckLaser.push_back(Laser(
+			{ engduck.position.x + engduck.duckImages[engduck.type - 1].width / 2,engduck.position.y + engduck.duckImages[engduck.type - 1].height }, 6, "Graphics/egg.png"));
 		lastFireTime = GetTime();
 	}
 }
@@ -181,7 +183,7 @@ void Game::CheckForCollisions()
 	}
 	for (auto& laser : engduckLaser)
 	{
-		if (CheckCollisionRecs(laser.getRect(), duck.getRect()))
+		if (CheckCollisionRecs(laser.getRectEgg(), duck.getRect()))
 		{
 			laser.active = false;
 			lives--;
