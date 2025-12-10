@@ -102,8 +102,8 @@ void Game::DeleteInactiveLasers()
 std::vector<Engduck> Game::CreateEngducks()
 {
 	std::vector<Engduck>engducks;
-	for (int row = 0; row < 3; row++) {
-		for (int col = 0; col < 10; col++)
+	for (int row = 0; row < 4; row++) {
+		for (int col = 0; col < 16; col++)
 		{
 			int engduckType;
 			if (row == 0)
@@ -118,8 +118,8 @@ std::vector<Engduck> Game::CreateEngducks()
 			{
 				engduckType = 1;
 			}
-			float x = 15 + col * 120;
-			float y = 10 + row * 140;
+			float x = 10 + col * 70;
+			float y = 15 + row * 80;
 			engducks.push_back(Engduck(engduckType, { x,y }));
 		}
 	}
@@ -129,7 +129,7 @@ void Game::MoveEngducks()
 {
 	for (auto& engduck : engducks)
 	{
-		if (engduck.position.x + engduck.duckImages[engduck.type - 1].width > GetScreenWidth())
+		if (engduck.position.x + engduck.duckImages[engduck.type - 1].width > GetScreenWidth() - 20)
 		{
 			engducksDirection = -1;
 			MoveDownEngducks(4);

@@ -10,7 +10,7 @@ Engduck::Engduck(int type, Vector2 position)
 
 
 	// handles duck image scale;
-	const float scale = 0.17;
+	const float scale = 0.12;
 	Image tempImage;
 
 	int newWidth;
@@ -63,8 +63,8 @@ int Engduck::GetType() {
 	return type;
 }
 Rectangle Engduck::getRect() {
-	return{position.x,position.y,float(duckImages[type-1].width),
-	float(duckImages[type-1].height)};
+	return{ position.x,position.y,float(duckImages[type - 1].width),
+	float(duckImages[type - 1].height) };
 }
 void Engduck::Update(int direction) {
 	position.x += direction;
