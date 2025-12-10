@@ -4,14 +4,14 @@ Theduck::Theduck()
 {
 	//image = LoadTexture("Graphics/water_gun_closed.png");
 	Image temp_image = LoadImage("Graphics/water_gun_closed.png");
-	const float scale = 0.17;
+	const float scale = 0.18;
 	int newWidth = temp_image.width * scale;
 	int newHeight = temp_image.height * scale;
 	ImageResize(&temp_image, newWidth, newHeight);
 	image = LoadTextureFromImage(temp_image);
 	UnloadImage(temp_image);
 	position.x = (GetScreenWidth() - image.width) / 2;
-	position.y = GetScreenHeight() - image.height -100;
+	position.y = GetScreenHeight() - image.height - 100;
 	lastFireTime = 0.0;
 }
 Theduck::~Theduck()
@@ -50,6 +50,6 @@ Rectangle Theduck::getRect() {
 void Theduck::Reset()
 {
 	position.x = (GetScreenWidth() - image.width) / 2.0f;
-	position.y = GetScreenHeight() - image.height-100;
+	position.y = GetScreenHeight() - image.height - 100;
 	lasers.clear();
 }

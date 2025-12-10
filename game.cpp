@@ -118,7 +118,7 @@ std::vector<Engduck> Game::CreateEngducks()
 			{
 				engduckType = 1;
 			}
-			float x = 10 + col * 90;
+			float x = 10 + col * 110;
 			float y = 15 + row * 90;
 			engducks.push_back(Engduck(engduckType, { x,y }));
 		}
