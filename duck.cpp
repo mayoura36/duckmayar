@@ -11,7 +11,7 @@ Theduck::Theduck()
 	image = LoadTextureFromImage(temp_image);
 	UnloadImage(temp_image);
 	position.x = (GetScreenWidth() - image.width) / 2;
-	position.y = GetScreenHeight() - image.height;
+	position.y = GetScreenHeight() - image.height -100;
 	lastFireTime = 0.0;
 }
 Theduck::~Theduck()
@@ -46,4 +46,10 @@ void Theduck::FireLaser() {
 }
 Rectangle Theduck::getRect() {
 	return { position.x,position.y,float(image.width),float(image.height) };
+}
+void Theduck::Reset()
+{
+	position.x = (GetScreenWidth() - image.width) / 2.0f;
+	position.y = GetScreenHeight() - image.height-100;
+	lasers.clear();
 }

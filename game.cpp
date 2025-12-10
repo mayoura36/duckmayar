@@ -6,6 +6,9 @@ Game::Game()
 	engducks = CreateEngducks();
 	engducksDirection = 1;
 	lastFireTime = 0.0;
+	lives = 3;
+	run = true;
+	InitGame();
 }
 Game::~Game()
 {
@@ -13,18 +16,30 @@ Game::~Game()
 }
 void Game::Update()
 {
-	for (auto& laser : duck.lasers)
+	if (run)
 	{
-		laser.Update();
+		double currentTime = GetTime();
+		for (auto& laser : duck.lasers)
+		{
+			laser.Update();
+		}
+		MoveEngducks();
+		EngduckShootLaser();
+		for (auto& laser : engduckLaser)
+		{
+			laser.Update();
+		}
+		DeleteInactiveLasers();
+		CheckForCollisions();
 	}
-	MoveEngducks();
-	EngduckShootLaser();
-	for (auto& laser : engduckLaser)
+	else
 	{
-		laser.Update();
+		if (IsKeyDown(KEY_ENTER))
+		{
+			Reset();
+			InitGame();
+		}
 	}
-	DeleteInactiveLasers();
-	CheckForCollisions();
 }
 void Game::Draw()
 {
@@ -45,17 +60,20 @@ void Game::Draw()
 }
 void Game::HandleInput()
 {
-	if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A))
+	if (run)
 	{
-		duck.MoveLeft();
-	}
-	if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D))
-	{
-		duck.MoveRight();
-	}
-	if (IsKeyPressed(KEY_SPACE))
-	{
-		duck.FireLaser();
+		if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A))
+		{
+			duck.MoveLeft();
+		}
+		if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D))
+		{
+			duck.MoveRight();
+		}
+		if (IsKeyPressed(KEY_SPACE))
+		{
+			duck.FireLaser();
+		}
 	}
 }
 void Game::DeleteInactiveLasers()
@@ -156,8 +174,47 @@ void Game::CheckForCollisions()
 			}
 			else
 			{
+				//no collision
 				++it;
 			}
 		}
 	}
+	for (auto& laser : engduckLaser)
+	{
+		if (CheckCollisionRecs(laser.getRect(), duck.getRect()))
+		{
+			laser.active = false;
+			lives--;
+			if (lives == 0)
+			{
+				GameOver();
+			}
+		}
+	}
+	for (auto& engduck : engducks)
+	{
+		if (CheckCollisionRecs(engduck.getRect(), duck.getRect()))
+		{
+			GameOver();
+		}
+	}
+}
+void Game::GameOver()
+{
+	run = false;
+}
+void Game::InitGame()
+{
+	engducks = CreateEngducks();
+	engducksDirection = 1;
+	lastFireTime = 0.0;
+	lives = 3;
+	run = true;
+}
+void Game::Reset()
+{
+	duck.Reset();
+	engducks.clear();
+	engduckLaser.clear();
+
 }
