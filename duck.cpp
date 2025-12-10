@@ -44,3 +44,6 @@ void Theduck::FireLaser() {
 		lastFireTime = GetTime();
 	}
 }
+Rectangle Theduck::getRect() {
+	return { position.x,position.y,float(image.width),float(image.height) };
+}

@@ -62,3 +62,10 @@ void Engduck::Draw() {
 int Engduck::GetType() {
 	return type;
 }
+Rectangle Engduck::getRect() {
+	return{position.x,position.y,float(duckImages[type-1].width),
+	float(duckImages[type-1].height)};
+}
+void Engduck::Update(int direction) {
+	position.x += direction;
+}
