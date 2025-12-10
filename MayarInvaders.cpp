@@ -18,7 +18,7 @@ int main()
 	Engduck engduck = Engduck(1, { 100,1000 });
 
 	//Background
-	Texture2D background = LoadTexture("Graphics/background_2.png");
+	Texture2D background = LoadTexture("Graphics/background.png");
 
 	//Laser laser = Laser({ 100,100 }, -7);
 	while (WindowShouldClose() == false)
