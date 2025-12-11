@@ -1,6 +1,6 @@
 #include "game.hpp"
 #include<iostream>
-
+#include<fstream>
 Game::Game()
 {
 	engducks = CreateEngducks();
@@ -114,6 +114,10 @@ std::vector<Engduck> Game::CreateEngducks()
 			{
 				engduckType = 2;
 			}
+			else if (row==2)
+			{
+				engduckType = 2;
+			}
 			else
 			{
 				engduckType = 1;
@@ -171,6 +175,19 @@ void Game::CheckForCollisions()
 		{
 			if (CheckCollisionRecs(it->getRect(), laser.getRect()))
 			{
+				if (it->type == 1)
+				{
+					score += 100;
+				}
+				else if (it->type == 2)
+				{
+					score += 200;
+				}
+				else if (it->type == 3)
+				{
+					score += 300;
+				}
+				checkForHighscore();
 				it = engducks.erase(it);//true collision
 				laser.active = false;//laser inactive
 			}
@@ -211,7 +228,46 @@ void Game::InitGame()
 	engducksDirection = 1;
 	lastFireTime = 0.0;
 	lives = 3;
+	score = 0;
+	highscore = loadHighscoreFromFile();
 	run = true;
+}
+void Game::checkForHighscore()
+{
+	if (score > highscore)
+	{
+		highscore = score;
+		saveHighscoreToFile(highscore);
+	}
+}
+void Game::saveHighscoreToFile(int highscore)
+{
+	std::ofstream highscoreFile("highscore.txt");
+	if (highscoreFile.is_open())
+	{
+		highscoreFile << highscore;
+		highscoreFile.close();
+	}
+	else
+	{
+		std::cerr << "Failed to save highscore to file" << std::endl;
+	}
+}
+int Game::loadHighscoreFromFile()
+{
+	int loadedHighscore = 0;
+	std::ifstream highscoreFile("highscore.txt");
+	if (highscoreFile.is_open())
+	{
+		highscoreFile >> loadedHighscore;
+		highscore >> loadedHighscore;
+		highscoreFile.close();
+	}
+	else
+	{
+		std::cerr << "Failed to load highscore from file." << std::endl;
+	}
+	return loadedHighscore;
 }
 void Game::Reset()
 {
