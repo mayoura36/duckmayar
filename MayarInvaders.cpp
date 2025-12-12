@@ -1,4 +1,3 @@
-// MayarInvaders.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //da el main bta3y
 #include "raylib.h"
 #include "game.hpp"
@@ -26,7 +25,7 @@ int main()
 	Engduck engduck = Engduck(1, { 100,1000 });
 
 	//Background
-	Texture2D background = LoadTexture("Graphics/background.png");
+	Texture2D background = LoadTexture("Graphics/background_3.png");
 
 	//Laser laser = Laser({ 100,100 }, -7);
 	while (WindowShouldClose() == false)
@@ -53,12 +52,12 @@ int main()
 			DrawTextureV(duckImage, { x,745 }, WHITE);
 			x += 75.0;
 		}
-		DrawTextEx(font, "SCORE", { 50,15 }, 34, 2, pink);///msh shayfaha
-		std::string scoreText = FormatWithLeadingZeros(game.score,5);
-		DrawTextEx(font, scoreText.c_str(), { 50,40 }, 34, 3, pink);
-		DrawTextEx(font, "HIGH-SCORE", { 570,15 }, 34, 2, pink);
+		DrawTextEx(font, "SCORE", { 26,660 }, 34, 2, pink); //msh shayfaha
+		std::string scoreText = FormatWithLeadingZeros(game.score, 5);
+		DrawTextEx(font, scoreText.c_str(), { 30,690 }, 34, 3, pink);
+		DrawTextEx(font, "HIGH-SCORE", { 600 - 200,745 }, 34, 2, pink);
 		std::string highscoreText = FormatWithLeadingZeros(game.highscore, 5);
-		DrawTextEx(font, highscoreText.c_str(), { 1000,40 }, 34, 3, pink);
+		DrawTextEx(font, highscoreText.c_str(), { 625,745 }, 34, 3, pink);
 		game.Draw();
 		//engduck.Draw();
 		//laser.Draw();
