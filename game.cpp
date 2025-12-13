@@ -3,7 +3,7 @@
 #include<fstream>
 Game::Game()
 {
-	counter = duckRows * duckColumns;
+	//counter = duckRows * duckColumns;
 	engducks = CreateEngducks();
 	engducksDirection = 1;
 	lastFireTime = 0.0;
@@ -206,7 +206,7 @@ void Game::CheckForCollisions()
 					score += 300;
 				}
 				checkForHighscore();
-				counter--;
+				//counter--;
 				it = engducks.erase(it);//true collision
 				laser.active = false;//laser inactive
 			}
@@ -300,10 +300,10 @@ void Game::Reset()
 
 void Game::NextLevel()
 {
-	if (counter == 0)
+	if (engducks.empty())
 	{
 		level++;
-		counter = duckRows * duckColumns;
+		//counter = duckRows * duckColumns;
 
 		// clear duck vectors
 		engducks.clear();

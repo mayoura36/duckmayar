@@ -18,7 +18,7 @@ public:
 	int lives;
 	int level;
 	int score;
-	int counter;
+	//int counter;
 	int highscore;
 	Music music;
 private:
