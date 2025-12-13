@@ -46,7 +46,7 @@ int main()
 		}
 		else
 		{
-			DrawTextEx(font, "PRESS ENTER TO RESTART", { 600 - 230,350 }, 34, 2, pink);
+		DrawTextEx(font, "PRESS ENTER TO RESTART", { 930 - 230,680 }, 34, 2, pink);
 			DrawTextEx(font, "GAME OVER", { 960,745 }, 34, 2, pink);
 		}
 		float x = 75.0;
@@ -64,6 +64,7 @@ int main()
 		std::string highscoreText = std::to_string(game.highscore);
 		DrawTextEx(font, highscoreText.c_str(), { 600 - 150 + 220,745 }, 34, 3, pink);
 		game.Draw();
+		//DrawTextEx(font, "PRESS ENTER TO RESTART", { 600 - 230,350 }, 34, 2, pink);
 		//engduck.Draw();
 		//laser.Draw();
 		EndDrawing();
