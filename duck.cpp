@@ -45,6 +45,7 @@ void Theduck::FireLaser() {
 		lasers.push_back(Laser({ position.x + image.width / 2 - 2,position.y }, -6));
 		lastFireTime = GetTime();
 		PlaySound(laserSound);
+		//SetMusicVolume(laserSound, 0.1);
 	}
 }
 Rectangle Theduck::getRect() {

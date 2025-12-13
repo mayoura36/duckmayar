@@ -9,12 +9,15 @@ Game::Game()
 	lives = 3;
 	run = true;
 	music = LoadMusicStream("soundeffects/backmusic.mp3");//hena el music bta3ty
+	explosionSound = LoadSound("soundeffects/duck.mp3");
 	PlayMusicStream(music);
+	//SetMusicVolume(music, 0.1);
 	InitGame();
 }
 Game::~Game()
 {
 	UnloadMusicStream(music);
+	UnloadSound(explosionSound);
 }
 void Game::Update()
 {
@@ -177,6 +180,7 @@ void Game::CheckForCollisions()
 		{
 			if (CheckCollisionRecs(it->getRect(), laser.getRect()))
 			{
+				PlaySound(explosionSound);
 				if (it->type == 1)
 				{
 					score += 100;

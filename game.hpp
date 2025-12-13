@@ -34,5 +34,5 @@ private:
 	std::vector<Laser>engduckLaser;
 	constexpr static float engduckLaserShootInterval = 0.35;
 	float lastFireTime;
-	//Sound explosionSound();
+	Sound explosionSound;
 };
