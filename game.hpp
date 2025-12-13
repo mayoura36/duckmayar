@@ -14,6 +14,7 @@ public:
 	int lives;
 	int score;
 	int highscore;
+	Music music;
 private:
 	void DeleteInactiveLasers();
 	std::vector<Engduck>CreateEngducks();
@@ -33,4 +34,5 @@ private:
 	std::vector<Laser>engduckLaser;
 	constexpr static float engduckLaserShootInterval = 0.35;
 	float lastFireTime;
+	//Sound explosionSound();
 };

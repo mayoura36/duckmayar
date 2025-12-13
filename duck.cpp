@@ -13,10 +13,12 @@ Theduck::Theduck()
 	position.x = (GetScreenWidth() - image.width) / 2;
 	position.y = GetScreenHeight() - image.height - 100;
 	lastFireTime = 0.0;
+	laserSound = LoadSound("soundeffects/water_sound.mp3");
 }
 Theduck::~Theduck()
 {
 	UnloadTexture(image);
+	UnloadSound(laserSound);
 }
 void Theduck::Draw()
 {
@@ -42,6 +44,7 @@ void Theduck::FireLaser() {
 	{
 		lasers.push_back(Laser({ position.x + image.width / 2 - 2,position.y }, -6));
 		lastFireTime = GetTime();
+		PlaySound(laserSound);
 	}
 }
 Rectangle Theduck::getRect() {

@@ -18,6 +18,7 @@ int main()
 	int windowwidth = 1150;
 	int windowheight = 700;
 	InitWindow(windowwidth + offset, windowheight + 2 * offset, "C++ Duck Invaders");
+	InitAudioDevice();
 	Font font = LoadFontEx("Font/MonterratAlternates-Bold.otf", 64, 0, 0);
 	Texture2D duckImage = LoadTexture("Graphics/pink_bow_lives.png");
 	SetTargetFPS(60);
@@ -30,6 +31,7 @@ int main()
 	//Laser laser = Laser({ 100,100 }, -7);
 	while (WindowShouldClose() == false)
 	{
+		UpdateMusicStream(game.music);
 		game.HandleInput();
 		game.Update();
 		//laser.Update();
@@ -65,4 +67,5 @@ int main()
 	}
 	UnloadTexture(background);
 	CloseWindow();
+	CloseAudioDevice();
 }

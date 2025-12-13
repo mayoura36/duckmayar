@@ -8,11 +8,13 @@ Game::Game()
 	lastFireTime = 0.0;
 	lives = 3;
 	run = true;
+	music = LoadMusicStream("soundeffects/backmusic.mp3");//hena el music bta3ty
+	PlayMusicStream(music);
 	InitGame();
 }
 Game::~Game()
 {
-
+	UnloadMusicStream(music);
 }
 void Game::Update()
 {
