@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="duck.cpp">
+    <ClCompile Include="watergun.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
@@ -32,7 +32,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="duck.hpp">
+    <ClInclude Include="watergun.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game.hpp">

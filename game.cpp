@@ -3,28 +3,33 @@
 #include<fstream>
 Game::Game()
 {
+	counter = duckRows * duckColumns;
 	engducks = CreateEngducks();
 	engducksDirection = 1;
 	lastFireTime = 0.0;
+	level = 1;
 	lives = 3;
 	run = true;
 	music = LoadMusicStream("soundeffects/backmusic.mp3");//hena el music bta3ty
 	explosionSound = LoadSound("soundeffects/duck.mp3");
+	SetSoundVolume(explosionSound, 0.35);
 	PlayMusicStream(music);
-	//SetMusicVolume(music, 0.1);
+	SetMusicVolume(music, 0.2);
+	egg = LoadSound("soundeffects/egg.ogg");
 	InitGame();
 }
 Game::~Game()
 {
 	UnloadMusicStream(music);
 	UnloadSound(explosionSound);
+	UnloadSound(egg);
 }
 void Game::Update()
 {
 	if (run)
 	{
 		double currentTime = GetTime();
-		for (auto& laser : duck.lasers)
+		for (auto& laser : watergun.lasers)
 		{
 			laser.Update();
 		}
@@ -34,6 +39,7 @@ void Game::Update()
 		{
 			laser.Update();
 		}
+		NextLevel();
 		DeleteInactiveLasers();
 		CheckForCollisions();
 	}
@@ -48,8 +54,8 @@ void Game::Update()
 }
 void Game::Draw()
 {
-	duck.Draw();
-	for (auto& laser : duck.lasers)
+	watergun.Draw();
+	for (auto& laser : watergun.lasers)
 	{
 		laser.Draw();
 
@@ -69,24 +75,30 @@ void Game::HandleInput()
 	{
 		if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A))
 		{
-			duck.MoveLeft();
+			watergun.MoveLeft();
 		}
 		if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D))
 		{
-			duck.MoveRight();
+			watergun.MoveRight();
 		}
 		if (IsKeyPressed(KEY_SPACE))
 		{
-			duck.FireLaser();
+			watergun.shootTimer = watergun.shootDuration;
+			watergun.FireLaser();
+		}
+
+		if (watergun.shootTimer > 0.0f)
+		{
+			watergun.shootTimer -= GetFrameTime();
 		}
 	}
 }
 void Game::DeleteInactiveLasers()
 {
-	for (auto it = duck.lasers.begin(); it != duck.lasers.end();) {
+	for (auto it = watergun.lasers.begin(); it != watergun.lasers.end();) {
 		if (!it->active)
 		{
-			it = duck.lasers.erase(it);
+			it = watergun.lasers.erase(it);
 		}
 		else
 		{
@@ -107,8 +119,8 @@ void Game::DeleteInactiveLasers()
 std::vector<Engduck> Game::CreateEngducks()
 {
 	std::vector<Engduck>engducks;
-	for (int row = 0; row < 4; row++) {
-		for (int col = 0; col < 10; col++)
+	for (int row = 0; row < duckRows; row++) {
+		for (int col = 0; col < duckColumns; col++)
 		{
 			int engduckType;
 			if (row == 0)
@@ -119,7 +131,7 @@ std::vector<Engduck> Game::CreateEngducks()
 			{
 				engduckType = 2;
 			}
-			else if (row==2)
+			else if (row == 2)
 			{
 				engduckType = 2;
 			}
@@ -173,7 +185,7 @@ void Game::EngduckShootLaser()
 void Game::CheckForCollisions()
 {
 	//watergun lasers
-	for (auto& laser : duck.lasers)
+	for (auto& laser : watergun.lasers)
 	{
 		auto it = engducks.begin();
 		while (it != engducks.end())
@@ -194,6 +206,7 @@ void Game::CheckForCollisions()
 					score += 300;
 				}
 				checkForHighscore();
+				counter--;
 				it = engducks.erase(it);//true collision
 				laser.active = false;//laser inactive
 			}
@@ -206,8 +219,9 @@ void Game::CheckForCollisions()
 	}
 	for (auto& laser : engduckLaser)
 	{
-		if (CheckCollisionRecs(laser.getRectEgg(), duck.getRect()))
+		if (CheckCollisionRecs(laser.getRectEgg(), watergun.getRect()))
 		{
+			PlaySound(egg);
 			laser.active = false;
 			lives--;
 			if (lives == 0)
@@ -218,7 +232,7 @@ void Game::CheckForCollisions()
 	}
 	for (auto& engduck : engducks)
 	{
-		if (CheckCollisionRecs(engduck.getRect(), duck.getRect()))
+		if (CheckCollisionRecs(engduck.getRect(), watergun.getRect()))
 		{
 			GameOver();
 		}
@@ -277,8 +291,26 @@ int Game::loadHighscoreFromFile()
 }
 void Game::Reset()
 {
-	duck.Reset();
+	level = 1;
+	watergun.Reset();
 	engducks.clear();
 	engduckLaser.clear();
 
+}
+
+void Game::NextLevel()
+{
+	if (counter == 0)
+	{
+		level++;
+		counter = duckRows * duckColumns;
+
+		// clear duck vectors
+		engducks.clear();
+
+		// reinit ducks
+		engducks = CreateEngducks();
+		engducksDirection = 1;
+		lastFireTime = 0.0;
+	}
 }

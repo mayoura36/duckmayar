@@ -127,14 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="duck.cpp" />
+    <ClCompile Include="watergun.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="laser.cpp" />
     <ClCompile Include="MayarInvaders.cpp" />
     <ClCompile Include="theduck.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="duck.hpp" />
+    <ClInclude Include="watergun.hpp" />
     <ClInclude Include="game.hpp" />
     <ClInclude Include="laser.hpp" />
     <ClInclude Include="theduck.hpp" />
